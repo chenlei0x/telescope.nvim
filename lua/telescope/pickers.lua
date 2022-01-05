@@ -675,6 +675,11 @@ function Picker:delete_selection(delete_cb)
   end
 
   local selection_index = {}
+
+  if self.finder.result == nil then
+      return
+  end
+  
   for result_index, result_entry in ipairs(self.finder.results) do
     if vim.tbl_contains(delete_selections, result_entry) then
       table.insert(selection_index, result_index)
@@ -775,7 +780,6 @@ end
 --- object (if present), `nil` otherwise
 function Picker:is_multi_selected(entry)
   return self._multi:is_selected(entry)
-end
 
 --- Get a table containing all of the currently selected entries
 ---@return table: an integer indexed table of selected entries
